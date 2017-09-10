@@ -44,7 +44,6 @@ class ListingsController < ApplicationController
 
   def discriminatory
     @listings = Listing.discriminatory
-      binding.pry
     render_listings_formats
   end
 
