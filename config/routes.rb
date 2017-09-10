@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   get '/tools/trackchanges', to: 'trackchanges#index'
   post '/tools/trackchanges', to: 'trackchanges#get_changes'
   get '/tools/trackform', to: 'trackchanges#trackform'
-  get '/Contact', to: 'contacts#index'
+  get '/contact', to: 'contacts#index'
 end
