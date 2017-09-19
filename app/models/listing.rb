@@ -1,6 +1,8 @@
 class Listing < ApplicationRecord
 	has_many :phrase_listings
-	has_many :phrases, through: :phrase_listings
+  has_many :phrases, through: :phrase_listings
+
+  before_save :check_discriminatory_and_set_flag
 
   def illegal?
     flag = false
@@ -49,11 +51,18 @@ class Listing < ApplicationRecord
 		@listings_in_range = []
 		Listing.all.each do |phrase_listing|
 			listed = phrase_listing.listed_at
-			if listed >= start_date && listed <= end_date
-				@listings_in_range.push(phrase_listing)
+			if listed
+				if listed >= start_date && listed <= end_date
+					@listings_in_range.push(phrase_listing)
+				end
 			end
 		end
 		@listings_in_range
 	end
 
+  private
+
+  def check_discriminatory_and_set_flag
+      self.discriminatory = illegal?
+  end
 end
